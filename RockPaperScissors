@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  background-color:#13274F;
+  color:white;
+  padding:10px;
+}
+
+img {
+  height: 150px;
+  width: 150px;
+ object-fit: cover;
+  border-radius: 50%;
+  margin:15px;
+}
+
+img:hover{
+border:3px solid black;
+margin:12px;
+cursor:pointer;
+}
+
+.score{
+font-size:22px;
+margin:30px;
+
+}
+
+#youscore, #compscore {
+font-size:40px;
+}
+
+#choice, #s {
+margin-top:10px;
+display: flex;
+justify-content: center;
+}
+
+#msgct{
+margin:0;
+}
+
+
+#msg{
+text-align: center;
+background-color:#13274F;
+color:white;
+font-size:26px;
+border-radius:1rem;
+padding:13px;
+
+}
+
+#uval,#cval {
+color: blue;
+font-size:20px;
+margin: 0;
+}
+</style>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Browser</title>
+</head>
+
+<body>
+
+<h1>Rock Paper Scissior</h1>
+<br>
+<br>
+
+<div id="choice">
+<div class="all" id="rock">
+  <img src="file:///C:/Users/Sreeja/Documents/Downloads/rock.png"/>
+</div>
+
+<div class="all" id="paper">
+  <img src="file:///C:/Users/Sreeja/Documents/Downloads/paper%20(2).png"/>
+</div>
+
+<div class="all" id="scissor">
+  <img src="file:///C:/Users/Sreeja/Documents/Downloads/scissors%20(1).png"/>
+</div>
+</div>
+
+<div id="s">
+<div class="score">
+<p id="youscore">0</p>
+<p>You</p>
+<span id="uval"></span>
+</div>
+
+<div class="score">
+<p id="compscore">0</p>
+<p>Comp</p>
+<span id="cval"></span>
+</div>
+</div>
+
+<br>
+<br>
+
+<div id="msgct">
+<span id="msg">Pick your move</span>
+</div>
+
+
+<script>
+
+let userscore=0;
+let compscore=0;
+
+const choice=document.querySelectorAll(".all");
+const ms= document.querySelector("#msg");
+const uscore=document.querySelector("#youscore");
+const cscore=document.querySelector("#compscore");
+const uval=document.querySelector("#uval");
+const cval=document.querySelector("#cval");
+
+choice.forEach((all)=> {
+all.addEventListener("click",() => {
+const userchoice= all.getAttribute("id");
+game(userchoice);
+});
+});
+
+const getcomp= () => {
+const arr=["rock","paper","scissor"];
+const idx= Math.floor( Math.random() * 3);
+return arr[idx];
+};
+
+const game= (userchoice) => {
+console.log(userchoice);
+const compchoice= getcomp();
+console.log(compchoice);
+
+if(userchoice === compchoice)
+{
+ms.innerHTML= "It was DRAW";
+ms.style.backgroundColor = "#13274F";
+}
+else
+{
+let userw=true;
+if(userchoice === "rock") {
+userw= compchoice==="scissor"? true:false ; 
+}
+else if(userchoice === "paper") {
+userw= compchoice==="scissor"? false: true; 
+}
+else {
+userw= compchoice==="rock"? false: true; 
+}
+wol(userw,userchoice,compchoice);
+}
+uval.innerText=userchoice;
+cval.innerText=compchoice;
+};
+
+const wol= (userw, userchoice, compchoice) => {
+if(userw) {
+ms.style.backgroundColor = "green";
+userscore++;
+uscore.innerHTML=userscore;
+ms.innerHTML=`You won! ${userchoice} beats ${compchoice}`;
+}
+else {
+ms.style.backgroundColor = "red";
+compscore++;
+cscore.innerHTML=compscore;
+ms.innerHTML=`You lost! ${compchoice} beats ${userchoice}`;
+}};
+
+</script>
+</body>
+</html>
