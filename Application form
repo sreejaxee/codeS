@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Application form</title> 
+ 
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width" initial-scale="1">
+</head>
+
+<body style="background-color:#1e262c;color:white;">
+<br>
+
+<h1 style="text-align: center; font-size:40px; padding:3px; text-decoration:2px underline;">APPLICATION FORM</h1>
+<br>
+
+<p style="text-align: center;">fill out all your information and submit the application form</p>
+
+<form action="/action_page.php" method="post" autocomplete="on">
+<fieldset>
+
+<br><label for="name">Name:</label>
+<input type="text" id="name" name="name" placeholder="full name" required><br><br>
+
+<label for="username">Username:</label>
+<input type="text" id="username" name="username" placeholder="username" required><br><br>
+
+<label for="email">Email:</label>
+<input type="email" id="email" name="email" placeholder="enter email here" required><br><br>
+
+<label for="password">Password:</label>
+<input type="password" id="password" name="password" placeholder="enter strong password" required><br><br>
+
+<label for="phone">Phone number:</label> 
+<input type="tel" id="phone" name="phone" placeholder="mobile no." required><br><br>
+
+<label for="nationality">Nationality:</label>
+<input list="nationality" name="nationality">
+<datalist id="nationality">
+<option value="Indian">
+<option value="american">
+<option value="russian">
+<option value="african">
+<option value="others">
+</datalist><br><br>
+
+<label for="add">Address:</label>
+<input type="text" id="add" name="address" size="50" placeholder="full address"> 
+<label for="pin">Pin:</label>
+<input type="text" id="pin" name="pin" maxlength="6" size="4" placeholder="pincode"><br><br>
+
+<label for="gender">Gender:</label>
+<input type="radio" id="gender female" name="gender" value="female">
+<label for="female">female</label>
+<input type="radio" id="gender male" name="gender" value="male">
+<label for="male">male</label>
+<input type="radio" id="gender other" name="gender" value="other">
+<label for="other">other</label><br><br>
+
+<label for="favcolor">Favorite color:</label>
+<input type="color" id="favcolor" name="favcolor"><br><br>
+
+<label for="birthdaytime">Birthday:</label>
+<input type="datetime-local" id="birthdaytime" name="birthdaytime"><br><br>
+
+<label for="qual">Qualification:</label>
+<input type="checkbox" id="qual 10th" name="qualify" value="10th pass">
+<label for="10th">10th pass</label> 
+<input type="checkbox" id="qual 12th" name="qualify" value="12th pass">
+<label for="12th">12th pass</label> 
+<input type="checkbox" id="qual dip" name="qualify" value="diploma">
+<label for="dip">diploma</label> 
+<input type="checkbox" id="qual grad" name="qualify" value="graduate">
+<label for="grad">graduate</label><br><br>
+
+<label for="myfile">Passport size photo:</label>
+<input type="file" id="myfile" name="myfile"><br><br>
+
+<label for="appt">Time of submission:</label>
+<input type="time" id="appt" name="appt"><br><br><br>
+
+<input type="checkbox" id="agree" name="conditions" required>
+<label for="agree">I agree to all the terms and conditions</label><br><br><br><br>
+
+<input type="submit" style="cursor:pointer;" formtarget="_blank" value="SUBMIT MY APPLICATION FORM"><br><br>
+
+</fieldset>
+</form>
+
+<br><br><br><hr>
+
+<p style="background-color:grey; color:black;"><strong>NOTE:</strong>The application fee (Rs 1500 for an online application) should be transferred to the bank account of the Office.Payment should be made prior to or on the date on which the application is filed.<br><br>
+
+Please be aware that the Office will not allocate a definitive application date when the payment has not reached the Office bank account or if the payment has not been identified by the Office due to incomplete information. A further consequence will be that the application will not be published in the CPVO’s Official Gazette.</p>
+<br><br><br><hr>
+
+<p style="text-align:center;"><i>
+Thank you for taking the time to complete this application form. We appreciate your interest in joining our organization. Please ensure that you have filled out all the required fields and provided accurate information.<br>
+
+If you have any additional documents or supporting materials that you would like to include, such as a resume or cover letter, please attach them to this application form.<br>
+
+We value diversity and inclusion and encourage applicants from all backgrounds to apply. Our selection process is based on merit and qualifications, and we are committed to providing equal opportunities to all candidates.<br>
+
+Once we have reviewed your application, we will be in touch to communicate the next steps. If you have any questions or need further assistance, please don't hesitate to reach out to our HR department at [contact information].<br><br>
+
+Thank you again for considering this opportunity and for your interest in our organization. We look forward to reviewing your application and getting to know you better.
+
+Remember to customize the note to reflect the specific instructions and guidelines applicable to your organization and the position you are hiring for.
+</i></p>
+</body>
+</html>
+
