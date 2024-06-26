@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TIC TAC TOE</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      background-color: #1e262c;
+      color: #FAF9F6;
+      font-family: arial, sans-serif;
+    }
+
+    h1 {
+      font-size: 35px;
+      font-family: arial, sans-serif;
+      margin-bottom: 5rem;
+      background-color: #72A0C1;
+      padding: 0.5rem;
+      color: #1e262c;
+    }
+
+    #sc {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.5rem;
+    }
+
+    #x,
+    #o {
+      border: 1px solid grey;
+      border-radius: 0.75rem;
+      padding: 0.2rem;
+      font-size: 26px;
+      font-family: Verdana, sans-serif;
+      text-align: center;
+      width: 10rem;
+      display: flex;
+      justify-content: space-around;
+      margin: 0.5rem;
+    }
+
+    p {
+      font-size: 17px;
+      margin-bottom: 2.5rem;
+    }
+
+    table {
+      margin: auto;
+      margin-bottom: 30px;
+      font-size: 60px;
+      border-collapse: collapse;
+    }
+
+    td:active {
+      background-color: #72A0C1;
+    }
+
+    td {
+      text-align: center;
+      height: 5rem;
+      width: 5.5rem;
+    }
+
+    #row1,
+    #row2 {
+      border-bottom: 3px solid grey;
+    }
+
+    .box {
+      width: 20%;
+      margin: 0 auto;
+      margin-top: 2rem;
+      background-clip: padding-box;
+      text-align: center;
+    }
+
+    .button {
+      font-size: 18px;
+      padding: 0.5rem;
+      color: #1e262c;
+      background-color: #72A0C1;
+      border: none;
+      border-radius: 2rem;
+      cursor: pointer;
+      text-decoration: none;
+      padding: 5px 22px;
+      margin-top: 20rem;
+    }
+
+    .button:active {
+      background-color: #5D8AA8;
+      box-shadow: #404040 0px 3px 10px;
+    }
+
+    .overlay {
+      position: absolute;
+      top: -300px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(0, 0, 0, 0.7);
+      visibility: hidden;
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .overlay:target {
+      visibility: visible;
+      opacity: 1;
+      top: 0px;
+    }
+
+    .popup {
+      margin: 250px auto;
+      padding: 23px;
+      padding-bottom: 9px;
+      border-radius: 1rem;
+      width: 15%;
+      position: relative;
+      transition: all 5s ease-in-out;
+      background-color: #1e262c;
+      color: white;
+    }
+
+    .popup h2 {
+      margin-top: 1rem;
+      margin-bottom: 30px;
+      font-family: Tahoma, Arial, sans-serif;
+    }
+
+    .popup .close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      transition: all 200ms;
+      font-size: 35px;
+      font-weight: bold;
+      text-decoration: none;
+      color: grey;
+    }
+
+    .popup .close:hover {
+      color: #5D8AA8;
+      transform: rotate(90deg);
+    }
+
+    .popup .choose {
+      display: flex;
+      justify-content: center;
+      gap: 5rem;
+      margin-top: 3rem;
+      margin-bottom: 3rem;
+      font-size: 2.3rem;
+    }
+
+    .choo {
+      border-radius: 0.75rem;
+      background-color: #72A0C1;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    .choo:hover {
+      background-color: #5D8AA8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Tic Tac Toe</h1>
+
+  <div id="sc">
+    <div id="x">
+      <div>x</div>
+      <div>-</div>
+    </div>
+
+    <div id="o">
+      <div>o</div>
+      <div>-</div>
+    </div>
+  </div>
+  <br>
+  <p id="msg">
+    Start game and select player
+  </p>
+
+  <div id="table">
+    <table>
+      <colgroup>
+        <col span="2" style="border-right: 3px solid grey;">
+      </colgroup>
+      <tr id="row1">
+        <td id="t0"></td>
+        <td id="t1"></td>
+        <td id="t2"></td>
+      </tr>
+      <tr id="row2">
+        <td id="t3"></td>
+        <td id="t4"></td>
+        <td id="t5"></td>
+      </tr>
+      <tr>
+        <td id="t6"></td>
+        <td id="t7"></td>
+        <td id="t8"></td>
+      </tr>
+    </table>
+  </div>
+  <br>
+
+  <div class="box">
+    <a class="button" href="#popup1" onclick="restartGame()">START</a>
+  </div>
+
+  <div id="popup1" class="overlay">
+    <div class="popup">
+      <h2>CHOOSE</h2>
+      <a class="close" href="#" onclick="closePopup()" >×</a>
+      <div class="choose">
+        <a class="choo" onclick="choosePlayer('x')">x</a>
+        <a class="choo" onclick="choosePlayer('o')">o</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let userChoice;
+    let compChoice;
+    let currentPlayer;
+    let gameOver = false;
+    const winConditions = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+    const cells = document.querySelectorAll('td');
+
+    const choosePlayer = (choice) => {
+      clearBoard();
+      userChoice = choice;
+      compChoice = choice === 'x' ? 'o' : 'x';
+      document.getElementById(choice).style.border = '2px solid #72A0C1';
+      document.getElementById(compChoice).style.border = '1px solid grey';
+      currentPlayer = userChoice;
+      document.querySelector('.overlay').style.visibility = 'hidden';
+      document.querySelector('.overlay').style.opacity = '0';
+      document.querySelector('.overlay').style.top = '-300px';
+      document.getElementById('msg').textContent = `Game started with ${userChoice.toUpperCase()}`;
+      cells.forEach(cell => cell.addEventListener('click', () => cellClick(cell)));
+    };
+
+    const cellClick = (cell) => {
+      if (gameOver) return; // Do nothing if game is over
+      if (cell.innerHTML === '') {
+        cell.innerHTML = currentPlayer;
+        checkWinner();
+        currentPlayer = currentPlayer === userChoice ? compChoice : userChoice;
+        if (!gameOver) {
+          setTimeout(compMove, 500);
+        }
+      }
+    };
+
+    const compMove = () => {
+      if (gameOver) return; // Do nothing if game is over
+      let emptyCells = [...cells].filter(cell => cell.innerHTML === '');
+      let randomIndex = Math.floor(Math.random() * emptyCells.length);
+      emptyCells[randomIndex].innerHTML = compChoice;
+      checkWinner();
+      currentPlayer = userChoice;
+    };
+
+    const checkWinner = () => {
+      for (let condition of winConditions) {
+        let [a, b, c] = condition;
+        if (cells[a].innerHTML !== '' &&
+          cells[a].innerHTML === cells[b].innerHTML &&
+          cells[a].innerHTML === cells[c].innerHTML) {
+          document.getElementById('msg').textContent = `${cells[a].innerHTML.toUpperCase()} wins!`;
+          gameOver = true;
+          disableCells();
+          return;
+        }
+      }
+      if ([...cells].every(cell => cell.innerHTML !== '')) {
+        document.getElementById('msg').textContent = "It's a draw!";
+        gameOver = true;
+        disableCells();
+      }
+    };
+
+    const disableCells = () => {
+      cells.forEach(cell => cell.removeEventListener('click', () => cellClick(cell)));
+    };
+
+    const restartGame = () => {
+      clearBoard();
+      gameOver = false;
+      document.querySelector('.overlay').style.visibility = 'visible';
+      document.querySelector('.overlay').style.opacity = '1';
+      document.querySelector('.overlay').style.top = '0px';
+      document.getElementById('msg').textContent = "Start game and select player";
+    };
+
+    const clearBoard = () => {
+      cells.forEach(cell => {
+        cell.innerHTML = '';
+      });
+    };
+
+
+    const closePopup = () => {
+      document.querySelector('.overlay').style.visibility = 'hidden';
+      document.querySelector('.overlay').style.opacity = '0';
+      document.querySelector('.overlay').style.top = '-300px';
+      document.getElementById('msg').textContent = "Start game or select player";
+    };
+  </script>
+
+</body>
+
+</html>
